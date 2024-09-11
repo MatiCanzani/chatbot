@@ -10,7 +10,7 @@ interface Message {
   timestamp: string;
   id: number;
   username: string;
-  content: string; // Adjust according to your message structure
+  content: string; 
 }
 
 interface AppContextType {
@@ -38,8 +38,11 @@ interface AppContextType {
   isOnBottom: boolean;
   country: string;
   unviewedMessageCount: number;
-  session: any; // Adjust the type as needed
+  session: any;
+  isChatCompleted: boolean;
+  setIsChatCompleted: Dispatch<SetStateAction<boolean>>;
 }
+
 
 export const AppContext = createContext<AppContextType | null>(null);
 
@@ -50,3 +53,5 @@ export const useAppContext = () => {
   }
   return context;
 };
+
+

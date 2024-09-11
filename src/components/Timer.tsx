@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../layout/AppContext';
+import { AppContext } from '../context/AppContext';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

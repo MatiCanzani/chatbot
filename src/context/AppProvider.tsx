@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, ReactNode } from 'react';
-import { AppContext } from '../layout/AppContext'; // Adjust the path as needed
-import { supabase } from '../../supabaseClient'; // Adjust the path as needed
+import { AppContext } from './AppContext'; 
+import { supabase } from '../../supabaseClient';
 
 interface User {
   name: string;
@@ -11,12 +11,11 @@ interface ChatMessage {
   id: number;
   username: string;
   content: string;
-  text: string; // Add this property
-  timestamp: string; // Add this property
+  text: string; 
+  timestamp: string;
 }
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // State variables
   const [user, setUser] = useState<User | null>(null);
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -31,13 +30,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [countryCode, setCountryCode] = useState<string>('');
   const [unviewedMessageCount, setUnviewedMessageCount] = useState<number>(0);
   const [session, setSession] = useState<any>(null);
+  const [isChatCompleted, setIsChatCompleted] = useState<boolean>(false);
+
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
 const getMessagesAndSubscribe = async () => {
   setError('');
   try {
-    // Initial message fetch
     const { data, error } = await supabase.from('messages').select().range(0, 49).order('id', { ascending: false });
     if (error) throw new Error(error.message);
 
@@ -136,10 +136,13 @@ const getMessagesAndSubscribe = async () => {
       localStorage.setItem('username', fetchedUsername);
     });
 
+
+
     return () => {
       authSubscription.unsubscribe();
     };
   }, []);
+  
 
   return (
     <AppContext.Provider value={{
@@ -157,6 +160,8 @@ const getMessagesAndSubscribe = async () => {
       loadingInitial,
       error,
       getMessagesAndSubscribe,
+      isChatCompleted,
+      setIsChatCompleted,
       username,
       setUsername,
       randomUsername,

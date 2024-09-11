@@ -7,7 +7,7 @@ const AlwaysScrollToBottom: React.FC = () => {
     if (elementRef.current) {
       elementRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, []);
+  });
 
   return <div ref={elementRef} />;
 };

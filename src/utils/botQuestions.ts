@@ -1,5 +1,3 @@
-// questions.tss
-
 export const botQuestions = [
   {
     id: 1,

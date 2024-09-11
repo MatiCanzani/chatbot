@@ -1,4 +1,3 @@
-// src/components/ParticipantForm.tsx
 import React, { useState } from 'react';
 
 interface ParticipantFormProps {
